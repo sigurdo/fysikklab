@@ -8,11 +8,7 @@ h = height(x, y)
 print("h:", h)
 
 x_interp = np.linspace(0.0, 1.2,50) #Er lengde fra til med antall intervaller
-<<<<<<< HEAD
 print("x_interp:", x_interp, len(x_interp))
-=======
-print("x_interp:", x_interp, len(x_interp))
->>>>>>> 0f7b3b7c0710182376575fc807ed6b7183c92cba
 y_interp = h(x_interp)
 print("y_interp:", y_interp, len(y_interp))
 
