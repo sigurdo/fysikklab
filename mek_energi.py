@@ -1,25 +1,30 @@
 import csv
-filename="" #Skriv inn navn til csv-fil
+from decimal import Decimal
+filename = "test.csv" #Skriv inn navn til csv-fil
 
-with open(filename) as csvfile: 
-    csvreader=csv.reader(csvfile)
+data = []
 
-    header =next(csvreader)
+with open(filename) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=";")
+
+    header = next(csvreader)
 
     for datapoint in csvreader:
 
-        values=[float(value) for value in datapoint]
 
+        values = [value for value in datapoint]
         data.append(values)
 
-m #massen til ballen.
-g=9.81 #gravitasjons konstaneten
+m = 1 #massen til ballen i kilo
+g = 9.81 #gravitasjons konstaneten
 
-v=[p[3]for p in data]
-h=[p[2]for p in data]
+v = [p[3]for p in data]
+h = [p[2]for p in data]
 
-mek_energi=[]
+mek_energi = [] #liste med det mekaniske energien
 
 for i in range(len(data)):
-    energi=m*g*h[i]]+0.5*m*(v[i])**2+7/10*m*(v[i])**2
-    energi.append(mek_energi)
+    energi = m*g* float(h[i])+0.7*m*(float(v[i]))**2 # renger ut mekanisk energi
+    mek_energi.append(energi)
+
+print(mek_energi)
