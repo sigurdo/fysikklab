@@ -15,16 +15,20 @@ with open(filename) as csvfile:
         values = [value for value in datapoint]
         data.append(values)
 
-m = 1 #massen til ballen i kilo
+m = 0.03 #massen til ballen i kilo vår veier 30 gram
 g = 9.81 #gravitasjons konstaneten
 
 v = [p[3]for p in data]
 h = [p[2]for p in data]
 
-mek_energi = [] #liste med det mekaniske energien
+mek_energi = []
 
 for i in range(len(data)):
-    energi = m*g* float(h[i])+0.7*m*(float(v[i]))**2 # renger ut mekanisk energi
+    energi = m*g* float(h[i])+0.7*m*(float(v[i]))**2
     mek_energi.append(energi)
 
 print(mek_energi)
+
+for i in range(len(mek_energi)-1):
+    energi_tap=(mek_energi[i]-mek_energi[i+1])*100 #Regner ut energitapet per sekund.
+print(energi_tap)
