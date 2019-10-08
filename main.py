@@ -1,4 +1,8 @@
+#import numpy
 import scipy
-from alfa import alfa
+
+def alfa(x):
+    return x
 
 print(alfa(4))
+#input()
