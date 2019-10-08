@@ -6,7 +6,7 @@ y = [0.278, 0.151, 0.08, 0.055, 0.078, 0.151, 0.275] #Høydene vi målte på lab
 
 h = height(x, y)
 
-x_interp = np.linspace(0.278, 0.151) #Litt usikker på hva som skal være her.
+x_interp = np.linspace(0.0 1.2,50) #Er lengde fra til med antall intervaller
 y_interp = h(x_interp)
 
 alpha = slope(h, x_interp) #Hellingsvinkelen til banen
