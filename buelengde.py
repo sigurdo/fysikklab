@@ -17,7 +17,6 @@ def getIndex(buelengde, x_interp, y_interp, alpha):
             s = sNew
         else:
             break
-        print(s, buelengde)
     
     return i
 
