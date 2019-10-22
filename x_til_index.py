@@ -1,5 +1,5 @@
 
-def from_x_to_alpha(x,x_list):
+def from_x_to_index(x,x_list):
     diff_0 = abs(x_list[0]-x)
     x_1 = 0
     for num in range(1,len(x_list)):
