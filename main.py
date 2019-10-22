@@ -3,13 +3,16 @@ import scipy
 from eksternlab import height,slope,curvature #MÃ¥ pip install eksternlab.
 import numpy as np
 import buelengde as buelengde
+import trackerData as trackerData
 import matplotlib as plt
 from pylab import *;plot();show()
 
-x = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
-y = [0.278, 0.151, 0.08, 0.055, 0.078, 0.151, 0.275] #HÃ¸ydene vi mÃ¥lte pÃ¥ labben
+x_track = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
+for i in range(len(x_track)):
+    x_track[i] *= 0.978
+y_track = [0.278, 0.151, 0.08, 0.055, 0.078, 0.151, 0.275] #HÃ¸ydene vi mÃ¥lte pÃ¥ labben
 
-h = height(x, y)
+h = height(x_track, y_track)
 print("h:", h)
 
 x_interp = np.linspace(0.0, 1.2,50) #Er lengde fra til med antall intervaller
@@ -24,17 +27,18 @@ kappa = curvature(h, x_interp) # Krumningsradiusen til banen.
 for i in range(len(alpha)):
     print("x:", "{:1.3f}".format(x_interp[i]), "y:", "{:1.3f}".format(y_interp[i]), "Alfa:", "{:1.3f}".format(alpha[i]), "Kappa:", "{:1.3f}".format(kappa[i]))
 
-totaltid = 45
+totaltid = 40
 iterasjoner = 5000
 
 a = [0]
-v = [0]
+v = [0.5]
 s = [0]
+x = [0]
 
 g = 9.81
-k = 0.002
-m = 0.005
-c = 1
+k = 0.00424
+m = 0.03
+c = 2/5
 dt = totaltid/iterasjoner
 
 def aks(n):
@@ -52,11 +56,17 @@ def spa(n): #spa står for spatium som betyr avstand på latin
     s.append(s_n)
     return s[n]
 
+def pos(n):
+    x_n = x[n-1] + v[n] * np.cos(alpha[buelengde.getIndex(s[n-1], x_interp, y_interp, alpha)]) * dt
+    x.append(x_n)
+    return x[n]
+
 def euler():
     for n in range(1, iterasjoner):
         aks(n)
         vel(n)
         spa(n)
+        pos(n)
         #if n < 200:
             #print("a = {:1.3f}".format(a[n]))
             #print("v = {:1.3f}".format(v[n]))
@@ -64,5 +74,52 @@ def euler():
 
 euler()
 
-plt.plot(range(iterasjoner), s)
-plt.show()
+t = [0]
+for i in range(1, iterasjoner):
+    t.append(t[i-1]+dt)
+
+"""x = []
+for i in range(iterasjoner):
+    x.append(buelengde.getX(s[i], x_interp, y_interp, alpha))"""
+
+tStart = []
+xStart = []
+for i in range(200):
+    tStart.append(t[i])
+    xStart.append(x[i])
+    
+    
+malingData = trackerData.getData("CSV/Klipp33test.csv")
+
+tOffset = malingData[0][0]
+xOffset = malingData[0][1]
+for i in range(len(malingData)):
+    malingData[i][0] = malingData[i][0] - tOffset
+    malingData[i][1] = malingData[i][1] - xOffset
+
+tData = []
+xData = []
+for i in range(len(malingData)):
+    tData.append(malingData[i][0])
+    xData.append(malingData[i][1])
+
+tDataStart = []
+xDataStart = []
+for i in range(200):
+    tDataStart.append(tData[i])
+    xDataStart.append(xData[i])
+
+#plt = matplotlib.pyplot.figure(figsize=(15.0, 10.0))
+
+kort = 0
+if kort:
+    plt.plot(tStart, xStart)
+    plt.plot(tDataStart, xDataStart)
+else:
+    plt.plot(t, x)
+    plt.plot(tData, xData)
+
+#plt.show()
+plt.savefig("test.png")
+
+print(x[len(x)-1], xData[len(xData)-1])

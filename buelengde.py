@@ -20,3 +20,6 @@ def getIndex(buelengde, x_interp, y_interp, alpha):
     
     return i
 
+def getX(buelengde, x_interp, y_interp, alpha):
+    i = getIndex(buelengde, x_interp, y_interp, alpha)
+    return x_interp[i]
