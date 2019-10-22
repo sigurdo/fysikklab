@@ -9,7 +9,7 @@ from pylab import *;plot();show()
 
 x_track = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
 for i in range(len(x_track)):
-    x_track[i] *= 0.978
+    x_track[i] *= 0.975
 y_track = [0.278, 0.151, 0.08, 0.055, 0.078, 0.151, 0.275] #HÃ¸ydene vi mÃ¥lte pÃ¥ labben
 
 h = height(x_track, y_track)
