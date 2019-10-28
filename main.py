@@ -139,6 +139,9 @@ if thingToPlot == "pos":
     else:
         plt.plot(t, x)
         plt.plot(tData, xData)
+    
+    plt.ylabel("x-posisjon[m]")
+    plt.legend(["Teoretisk", "Eksperimentelt"])
 
 elif thingToPlot == "forces":
     kort = 0
@@ -156,10 +159,13 @@ elif thingToPlot == "forces":
     else:
         plt.plot(t, f)
         plt.plot(t, N)
+    
+    plt.ylabel("kraft[N]")
+    plt.legend(["Rullefriksjon", "Normalkraft"])
+
+plt.xlabel("tid[s]")
 
 #plt.show()
 plt.savefig("test.png")
-
-print("Hei", f[1], N[1], kappa)
 
 print(x[len(x)-1], xData[len(xData)-1])

@@ -3,4 +3,4 @@ __pycache__
 .vscode
 .spyproject
 
-test.png
+*.png
