@@ -23,6 +23,7 @@ print("y_interp:", y_interp, len(y_interp))
 alpha = slope(h, x_interp) #Hellingsvinkelen til banen
 
 kappa = curvature(h, x_interp) # Krumningsradiusen til banen.
+kappa[0] = kappa[1]
 
 for i in range(len(alpha)):
     print("x:", "{:1.3f}".format(x_interp[i]), "y:", "{:1.3f}".format(y_interp[i]), "Alfa:", "{:1.3f}".format(alpha[i]), "Kappa:", "{:1.3f}".format(kappa[i]))
@@ -34,6 +35,8 @@ a = [0]
 v = [0.5]
 s = [0]
 x = [0]
+f = [0]
+N = [0.3]
 
 g = 9.81
 k = 0.00424
@@ -61,12 +64,26 @@ def pos(n):
     x.append(x_n)
     return x[n]
 
+def fri(n):
+    i = buelengde.getIndex(s[n], x_interp, y_interp, alpha)
+    f_n = 2/7 * (m * g * np.sin(alpha[i]) - k * v[n])
+    f.append(f_n)
+    return f[n]
+
+def nor(n):
+    i = buelengde.getIndex(s[n], x_interp, y_interp, alpha)
+    N_n = m * (g * np.cos(alpha[i]) + v[n]**2 / kappa[i])
+    N.append(N_n)
+    return N[n]
+
 def euler():
     for n in range(1, iterasjoner):
         aks(n)
         vel(n)
         spa(n)
         pos(n)
+        fri(n)
+        nor(n)
         #if n < 200:
             #print("a = {:1.3f}".format(a[n]))
             #print("v = {:1.3f}".format(v[n]))
@@ -111,15 +128,38 @@ for i in range(200):
 
 #plt = matplotlib.pyplot.figure(figsize=(15.0, 10.0))
 
-kort = 0
-if kort:
-    plt.plot(tStart, xStart)
-    plt.plot(tDataStart, xDataStart)
-else:
-    plt.plot(t, x)
-    plt.plot(tData, xData)
+thingsToPlot = ["pos", "forces"]
+thingToPlot = thingsToPlot[1]
+
+if thingToPlot == "pos":
+    kort = 0
+    if kort:
+        plt.plot(tStart, xStart)
+        plt.plot(tDataStart, xDataStart)
+    else:
+        plt.plot(t, x)
+        plt.plot(tData, xData)
+
+elif thingToPlot == "forces":
+    kort = 0
+    if kort:
+        tStart = []
+        fStart = []
+        NStart = []
+        for n in range(int(iterasjoner*0), int(iterasjoner*0.1)):
+            tStart.append(t[n])
+            fStart.append(f[n])
+            NStart.append(N[n])
+        
+        plt.plot(tStart, fStart)
+        plt.plot(tStart, NStart)
+    else:
+        plt.plot(t, f)
+        plt.plot(t, N)
 
 #plt.show()
 plt.savefig("test.png")
+
+print("Hei", f[1], N[1], kappa)
 
 print(x[len(x)-1], xData[len(xData)-1])
