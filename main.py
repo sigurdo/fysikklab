@@ -129,7 +129,7 @@ for i in range(200):
 #plt = matplotlib.pyplot.figure(figsize=(15.0, 10.0))
 
 thingsToPlot = ["pos", "forces", "vel"]
-thingToPlot = thingsToPlot[2]
+thingToPlot = thingsToPlot[0]
 
 if thingToPlot == "pos":
     kort = 0

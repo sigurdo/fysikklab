@@ -6,7 +6,8 @@ import Feil as Feil
 from scipy.integrate import simps
 from decimal import Decimal
 k=[]
-for fil in range(33, 39):
+for fil in [0, 2, 3, 4, 6, 7, 8, 9, 38, "33test"]:
+    print("filnr:", fil)
     filnavn="Klipp"+str(fil)+".csv"
     filename = filnavn #Skriv inn navn til csv-fil
 
