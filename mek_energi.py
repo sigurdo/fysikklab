@@ -57,11 +57,4 @@ for fil in range(33, 39):
 
 print("k_liste:", k)
 print("Standar avvik" +str(Feil.standardavvik(k)))
-def gjennomsnitt(k):
-    total=0
-    for element in k:
-        total+=element
-    
-    return total/len(k)
-
-print("Standarfeil" +str(Feil.standardfeil(gjennomsnitt(k),k)))
+print("Standarfeil" +str(Feil.standardfeil(k)))
