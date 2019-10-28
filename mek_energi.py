@@ -1,15 +1,16 @@
 import csv
 import numpy
 import random
-import trackerData
+import trackerData as trackerData
+import Feil as Feil
 from scipy.integrate import simps
 from decimal import Decimal
 for fil in range(32, 39):
     filnavn=str(fil)+".csv"
     filename = filnavn #Skriv inn navn til csv-fil
 
-    data = getData(filename)
-    
+    data = trackerData.getData(filename)
+
     # with open(filename) as csvfile:
     #     csvreader = csv.reader(csvfile, delimiter=";")
 
@@ -34,7 +35,7 @@ for fil in range(32, 39):
         mek_energi.append(energi)
 
     fart_float=[]
-
+    k=[]
     for test in range(len(v)):
         mid=float(v[test])
         fart_float.append(pow(mid, 2))
@@ -47,5 +48,16 @@ for fil in range(32, 39):
         energi_tap += (mek_energi[i+1]-mek_energi[i]) #Regner ut energitapet per sekund.
 
     print(energi_tap)
+    k.append(-(energi_tap/integral)*100))
 
     print("k:"+str(-(energi_tap/integral)*100))
+
+print("Standar avvik" +str(Feil.standardavvik(k)))
+def gjennomsnitt(k):
+    total=0
+    for element in k:
+        total+=element
+    
+   return  total/len(k)
+
+print("Standarfeil" +str(Feil.standardfeil(gjennomsnitt(k),k)))
