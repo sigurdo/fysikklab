@@ -1,5 +1,5 @@
 import numpy as np
-
+import math 
 def standardavvik(v_list):
     avg = np.mean(v_list)
     sum = 0
