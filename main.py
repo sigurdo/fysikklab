@@ -128,8 +128,8 @@ for i in range(200):
 
 #plt = matplotlib.pyplot.figure(figsize=(15.0, 10.0))
 
-thingsToPlot = ["pos", "forces"]
-thingToPlot = thingsToPlot[1]
+thingsToPlot = ["pos", "forces", "vel"]
+thingToPlot = thingsToPlot[2]
 
 if thingToPlot == "pos":
     kort = 0
@@ -162,6 +162,22 @@ elif thingToPlot == "forces":
     
     plt.ylabel("kraft[N]")
     plt.legend(["Rullefriksjon", "Normalkraft"])
+
+elif thingToPlot == "vel":
+    vAbs = []
+    #for el in v:
+    vAbs= np.abs(v)
+    tData = []
+    vData = []
+    for i in range(len(malingData)):
+        tData.append(malingData[i][0])
+        vData.append(malingData[i][3])
+    
+    plt.plot(t, vAbs)
+    plt.plot(tData, vData)
+    
+    plt.ylabel("fart[m/s]")
+    plt.legend(["Teoretisk", "Eksperimentelt"])
 
 plt.xlabel("tid[s]")
 
