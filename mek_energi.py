@@ -57,5 +57,6 @@ for fil in [0, 2, 3, 4, 6, 7, 8, 9, 38, "33test"]:
     k.append(-(energi_tap/integral)*100)
 
 print("k_liste:", k)
-print("Standar avvik" +str(Feil.standardavvik(k)))
-print("Standarfeil" +str(Feil.standardfeil(k)))
+print("k_gjennomsnitt:", numpy.mean(k))
+print("Standardavvik: "+str(Feil.standardavvik(k)))
+print("Standardfeil: " +str(Feil.standardfeil(k)))
