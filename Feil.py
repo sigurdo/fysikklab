@@ -1,4 +1,5 @@
 import numpy as np
+import math as math 
 
 def standardavvik(v_list):
     avg = np.mean(v_list)
@@ -11,8 +12,8 @@ def standardavvik(v_list):
     return dx
 
 def standardfeil(avv,v_list):
-    len = len(v_list)
-    avg_avv = float(avv)/(float(math.sqrt(len)))
+    length = len(v_list)
+    avg_avv = float(avv)/(float(math.sqrt(length)))
     return avg_avv 
     
 
