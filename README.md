@@ -1,4 +1,4 @@
-# fysikklabFysikk
+# Fysikklab
 
 Fysikklab for emnen TFY4104, TFY4109 og TFY4115.
 
