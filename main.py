@@ -182,6 +182,6 @@ elif thingToPlot == "vel":
 plt.xlabel("tid[s]")
 
 #plt.show()
-plt.savefig("test.png")
+plt.savefig("test.png", dpi=900)
 
 print(x[len(x)-1], xData[len(xData)-1])
